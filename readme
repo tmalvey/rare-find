@@ -1,0 +1,11 @@
+
+# start mongodb
+mongod run --config /usr/local/etc/mongod.conf
+
+# start redis
+redis-server /usr/local/etc/redis.conf
+
+# start resque
+env VVERBOSE=1 QUEUE='*' TERM_CHILD=1 bundle exec rake resque:work
+
+
