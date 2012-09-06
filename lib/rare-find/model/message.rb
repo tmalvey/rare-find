@@ -1,4 +1,4 @@
-class Message < Liquid::Drop
+class Message
   include MongoMapper::Document
 
   key :recipient, String, :required => true
@@ -7,6 +7,4 @@ class Message < Liquid::Drop
   key :body, String, :required => true
 
   attr_accessible :recipient, :sender, :subject, :body
-
-  liquid_methods :name
 end

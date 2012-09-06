@@ -12,6 +12,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.1.4, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.1.9, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="domain_name (v0.5.3, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="foreman (v0.57.0, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.0, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="liquid (v2.4.1, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.4.4, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
@@ -33,6 +34,7 @@
     <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.2.1, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="resque (v1.22.0, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sinatra (v1.3.3, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thor (v0.16.0, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.10, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf (v0.0.5, RVM: ree-1.8.7-2011.12 [rare-find]) [gem]" level="application" />

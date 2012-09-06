@@ -6,40 +6,39 @@ require 'liquid'
 
 
 class NotificationJob
-  @queue = :test_q
+  @queue = :listing_notification
+  @email_template = "lib/rare-find/workers/templates/email.liquid"
 
-  def self.perform (transaction_id)
-    MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
-    MongoMapper.database = 'rare-find'
 
-    file_path = "lib/rare-find/workers/templates/email.liquid"
-    temp = Liquid::Template.parse(File.new(file_path).read)
-    listings = Listing.all(:transaction_id => transaction_id).to_a
+  def self.perform (transaction_id, query_ids)
+    MongoMapper.connection = Mongo::Connection.new(DB_CONFIG['host'], DB_CONFIG['port'])
+    MongoMapper.database = DB_CONFIG['database']
 
-    message = temp.render 'listings' => listings
+    queries = Hash.new
+    msg_recipient = nil
 
-    Mail.defaults do
-      delivery_method :smtp, { :address              => "smtp.gmail.com",
-                               :port                 => 587,
-                               :domain               => 'localhost',
-                               :user_name            => 'tmalvey@tmalvey.com',
-                               :password             => '@455s82Tcfu#',
-                               :authentication       => 'plain',
-                               :enable_starttls_auto => true  }
+    query_ids.each do |q_id|
+      query = Query.find(q_id)
+      queries[query.title] = query.listings.all(:transaction_id => transaction_id)
+
+      msg_recipient ||= query.recipient
     end
 
-
-    mail = Mail.new do
-      to 'tmalvey@gmail.com'
-      from 'tmalvey@tmalvey.com'
-      subject 'rare-find listings'
-      html_part do
-        content_type 'text/html; charset=UTF-8'
-        body message
-      end
-    end
-
-    mail.deliver!
-
+    Mailer.deliver(get_message(queries, msg_recipient))
   end
+
+
+  # private
+  def self.get_message(queries, recipient)
+    body = get_message_body(queries)
+    Message.new(:recipient => recipient, :subject => 'You have a rare find!', :body => body)
+  end
+
+  def self.get_message_body(queries)
+    query_parser = Liquid::Template.parse(File.new(@email_template).read)
+    query_parser.render 'queries' => queries
+  end
+
+  private_class_method :get_message
+  private_class_method :get_message_body
 end

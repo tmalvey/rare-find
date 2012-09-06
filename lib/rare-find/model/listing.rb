@@ -5,7 +5,7 @@ class Listing
   safe
 
   key :listing_id, String, :required => true
-  key :query_id, String, :required => true
+  key :query_id,  ObjectId
   key :transaction_id, String, :required => true
   key :title, String, :required => true
   key :url, String, :required => true
@@ -14,6 +14,8 @@ class Listing
   key :has_image, Boolean, :required => true
   key :category, String
   timestamps!
+
+  belongs_to :query
 
   attr_accessible :listing_id, :transaction_id, :title, :url, :price, :location, :has_image, :category
   liquid_methods :url, :title, :price, :location

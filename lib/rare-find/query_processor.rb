@@ -7,33 +7,44 @@ require 'resque'
 
 class QueryProcessor
 
-  def  initialize
-    MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
-    MongoMapper.database = 'rare-find'
+  def initialize
+    MongoMapper.connection = Mongo::Connection.new(DB_CONFIG['host'], DB_CONFIG['port'])
+    MongoMapper.database = DB_CONFIG['database']
+
     @transaction_id = UUIDTools::UUID.random_create
+    @send_notification = false
+    @query_ids = Set.new
   end
 
   def run
-    send_notification = false
-
-    queries = Query.runnable_queries
+    queries = Query.active_queries
 
     queries.each do |query|
-      dom = get_dom(query.url)
+      process_query(query)
+    end
 
-      #puts "running query: #{query.to_xml}"
+    Resque.enqueue(NotificationJob, @transaction_id.to_s, @query_ids) if @send_notification
+  end
 
-      dom.css('.row').each do |raw_listing|
-        listing = ListingParser.parse(raw_listing, query.id, @transaction_id)
-        #puts "found listing #{listing}"
 
-        if listing.do_safe_save
-          send_notification = true
-        end
-      end
+  private
 
-      Resque.enqueue(NotificationJob, @transaction_id.to_s) if send_notification
-      query.go_to_sleep
+  def process_query(query)
+    dom = get_dom(query.url)
+
+    dom.css('.row').each do |raw_listing|
+      process_listing(query.id, raw_listing)
+    end
+
+    query.go_to_sleep
+  end
+
+  def process_listing(query_id, raw_listing)
+    listing = ListingParser.parse(raw_listing, query_id, @transaction_id)
+
+    if listing.do_safe_save
+      @query_ids.add(query_id)
+      @send_notification = true
     end
   end
 
@@ -41,11 +52,4 @@ class QueryProcessor
     agent = Mechanize.new
     agent.get(url).search('p.row')
   end
-
-  def save_listing(listing)
-    if listing.create
-      listings_digest << listing.to_s
-    end
-  end
-
 end

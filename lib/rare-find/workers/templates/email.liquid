@@ -343,7 +343,7 @@
                                 	<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateHeader">
                                         <tr>
                                             <td class="headerContent">
-                                               <div id="social">rare-find query results</div>
+                                               <div id="social">Hey! We located some of the items you were searching for: </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -362,13 +362,16 @@
                                                     <tr>
                                                         <td valign="top">
                                                             <div mc:edit="std_content00">
-                                                                {% for listing in listings %}
-                                                                   <ul>
-                                                                    <li><a href="{{listing.url}}">{{listing.title}}</a>: {{listing.price}}</li>
-                                                                   </ul>
+                                                                {% for query in queries %}
+                                                                    Your query: {{query[0]}}
+                                                                    {% assign listings = query[1] %}
+
+                                                                    {% for listing in listings %}
+                                                                        <li><a href="{{listing.url}}">{{listing.title}}</a>: {{listing.price}}</li>
+                                                                    {% endfor %}
                                                                 {% endfor %}
-                                                                   <br />
-                                                                   <br />
+                                                               <br />
+                                                               <br />
                                                             </div>
 														</td>
                                                     </tr>

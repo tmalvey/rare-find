@@ -1,0 +1,5 @@
+require "#{RF_ROOT}/lib/rare-find/workers/notification_job.rb"
+require "#{RF_ROOT}/lib/rare-find/model/listing.rb"
+require "#{RF_ROOT}/lib/rare-find/model/query.rb"
+require "#{RF_ROOT}/lib/rare-find/model/message.rb"
+require "#{RF_ROOT}/lib/rare-find/mailer"

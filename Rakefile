@@ -1,27 +1,20 @@
 require 'resque/tasks'
 require 'mongo'
 require 'mongo_mapper'
-require 'lib/rare-find/model/listing'
-
+RF_ROOT = "#{File.dirname(__FILE__)}"
+require "#{RF_ROOT}/config/load_config.rb"
 
 
 task "resque:setup" do
-  root_path = "#{File.dirname(__FILE__)}"
-  #$:<< "#{root_path}/lib"
-  #$:<< "#{root_path}/lib/rare-find/model"
-  #puts $LOAD_PATH
-
-  require "#{root_path}/lib/rare-find/workers/notification_job.rb"
-  require "#{root_path}/lib/rare-find/model/listing.rb"
+  require "#{RF_ROOT}/config/resque.rb"
 end
-
 
 namespace :db  do
   namespace :mongo do
 
     task :connection do
-      MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
-      MongoMapper.database = 'rare-find'
+      MongoMapper.connection = Mongo::Connection.new(DB_CONFIG['host'], DB_CONFIG['port'])
+      MongoMapper.database = DB_CONFIG['database']
     end
 
     desc "Create mongo_mapper indexes"
