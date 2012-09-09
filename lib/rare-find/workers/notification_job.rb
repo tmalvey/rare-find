@@ -9,10 +9,8 @@ class NotificationJob
   @queue = :listing_notification
   @email_template = "lib/rare-find/workers/templates/email.liquid"
 
-
   def self.perform (transaction_id, query_ids)
-    MongoMapper.connection = Mongo::Connection.new(DB_CONFIG['host'], DB_CONFIG['port'])
-    MongoMapper.database = DB_CONFIG['database']
+    DbAccess.connect
 
     queries = Hash.new
     msg_recipient = nil

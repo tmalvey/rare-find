@@ -1,16 +1,9 @@
 require 'rubygems'
-require 'mechanize'
-require 'uuidtools'
-require 'mongo_mapper'
-require 'resque'
-
 
 class QueryProcessor
 
   def initialize
-    MongoMapper.connection = Mongo::Connection.new(DB_CONFIG['host'], DB_CONFIG['port'])
-    MongoMapper.database = DB_CONFIG['database']
-
+    DbAccess.connect
     @transaction_id = UUIDTools::UUID.random_create
     @send_notification = false
     @query_ids = Set.new
@@ -42,7 +35,7 @@ class QueryProcessor
   def process_listing(query_id, raw_listing)
     listing = ListingParser.parse(raw_listing, query_id, @transaction_id)
 
-    if listing.do_safe_save
+    if listing.save
       @query_ids.add(query_id)
       @send_notification = true
     end

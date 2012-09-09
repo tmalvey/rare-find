@@ -8,7 +8,7 @@ class Mailer
                                :user_name            => MAIL_CONFIG['user_name'],
                                :password             => MAIL_CONFIG['password'],
                                :authentication       => MAIL_CONFIG['authentication'],
-                               :enable_starttls_auto => MAIL_CONFIG['enable_starttls_auto']  }
+                               :enable_starttls_auto => MAIL_CONFIG['enable_starttls_auto'],  }
     end
 
 
