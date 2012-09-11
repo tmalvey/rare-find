@@ -23,6 +23,7 @@ class QueryProcessor
   private
 
   def process_query(query)
+    puts "processing query: #{query.title}"
     dom = get_dom(query.url)
 
     dom.css('.row').each do |raw_listing|
@@ -34,7 +35,7 @@ class QueryProcessor
 
   def process_listing(query_id, raw_listing)
     listing = ListingParser.parse(raw_listing, query_id, @transaction_id)
-
+    puts "processing listing: #{listing.title}"
     if listing.save
       @query_ids.add(query_id)
       @send_notification = true

@@ -1,9 +1,11 @@
 ENV["RF_ENV"] = 'test'
 
-APP_ROOT = File.expand_path(File.dirname(__FILE__)).gsub(/rare-find\/spec.*$/, 'rare-find/')
+APP_ROOT = File.expand_path(File.dirname(__FILE__)).gsub(/rare-find\/spec.*$/, 'rare-find')
 require "#{APP_ROOT}/config/init.rb"
+require "#{APP_ROOT}/spec/support/vcr.rb"
 require 'factory_girl'
 require 'shoulda/matchers'
+
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -11,6 +13,7 @@ RSpec.configure do |config|
   config.filter_run :focus
 
   config.include FactoryGirl::Syntax::Methods
+  FactoryGirl.definition_file_paths = %W(#{APP_ROOT}/spec/factories)
   FactoryGirl.find_definitions
 
   # Run specs in random order to surface order dependencies. If you find an
