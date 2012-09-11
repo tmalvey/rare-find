@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e7ad752-9bad-445c-a377-bfe79d1a29cd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/lib/query_processor_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/support/vcr.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/model/factories/listings.rb" afterPath="$PROJECT_DIR$/spec/factories/listings.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/model/factories/queries.rb" afterPath="$PROJECT_DIR$/spec/factories/queries.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/model/listing_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/model/listing_spec.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/model/query_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/model/query_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/rare-find.iml" afterPath="$PROJECT_DIR$/.idea/rare-find.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config.yml" afterPath="$PROJECT_DIR$/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rare-find/query_processor.rb" afterPath="$PROJECT_DIR$/lib/rare-find/query_processor.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/spec_helper.rb" afterPath="$PROJECT_DIR$/spec/spec_helper.rb" />
     </list>
     <ignored path="rare-find.iws" />
     <ignored path=".idea/workspace.xml" />
