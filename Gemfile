@@ -20,4 +20,5 @@ group :test, :development do
   gem "factory_girl", "~> 4.0"
   gem "vcr"
   gem "fakeweb"
+  gem "resque_spec"
 end

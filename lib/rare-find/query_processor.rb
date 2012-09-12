@@ -17,6 +17,8 @@ class QueryProcessor
     end
 
     Resque.enqueue(NotificationJob, @transaction_id.to_s, @query_ids) if @send_notification
+
+    @transaction_id
   end
 
 

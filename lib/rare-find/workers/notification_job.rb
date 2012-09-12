@@ -11,6 +11,7 @@ class NotificationJob
 
   def self.perform (transaction_id, query_ids)
     DbAccess.connect
+    puts "FOUND Queryids : " + query_ids
 
     queries = Hash.new
     msg_recipient = nil
